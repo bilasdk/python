@@ -2,10 +2,16 @@
 
 from typing import List, Optional
 
-from .bila_response import BilaResponse
+from .._models import BaseModel
 
 __all__ = ["WebhookListEventsResponse"]
 
 
-class WebhookListEventsResponse(BilaResponse):
+class WebhookListEventsResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
     data: Optional[List[str]] = None

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0 (2026-06-05)
+
+Full Changelog: [v0.0.2...v0.1.0](https://github.com/bilasdk/python/compare/v0.0.2...v0.1.0)
+
+### Features
+
+* **api:** manual updates ([0280f8e](https://github.com/bilasdk/python/commit/0280f8e3594f02b54530d74d963e4cc0ae84a289))
+
 ## 0.0.2 (2026-06-04)
 
 Full Changelog: [v0.0.1...v0.0.2](https://github.com/bilasdk/python/compare/v0.0.1...v0.0.2)

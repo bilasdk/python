@@ -8,10 +8,10 @@ __all__ = ["ResolveMobileMoneyParams"]
 
 
 class ResolveMobileMoneyParams(TypedDict, total=False):
-    country: Required[Literal["zm", "ng"]]
+    country: Required[Literal["zm"]]
     """Country code"""
 
-    operator: Required[Literal["airtel", "mtn", "zamtel", "vodacom"]]
+    operator: Required[Literal["airtel", "mtn", "zamtel"]]
     """Mobile money operator"""
 
     phone: Required[str]

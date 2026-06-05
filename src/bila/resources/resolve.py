@@ -51,7 +51,7 @@ class ResolveResource(SyncAPIResource):
         *,
         account_number: str,
         bank_id: str,
-        country: Literal["zm", "ng"] | Omit = omit,
+        country: Literal["zm"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -96,8 +96,8 @@ class ResolveResource(SyncAPIResource):
     def mobile_money(
         self,
         *,
-        country: Literal["zm", "ng"],
-        operator: Literal["airtel", "mtn", "zamtel", "vodacom"],
+        country: Literal["zm"],
+        operator: Literal["airtel", "mtn", "zamtel"],
         phone: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -168,7 +168,7 @@ class AsyncResolveResource(AsyncAPIResource):
         *,
         account_number: str,
         bank_id: str,
-        country: Literal["zm", "ng"] | Omit = omit,
+        country: Literal["zm"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -213,8 +213,8 @@ class AsyncResolveResource(AsyncAPIResource):
     async def mobile_money(
         self,
         *,
-        country: Literal["zm", "ng"],
-        operator: Literal["airtel", "mtn", "zamtel", "vodacom"],
+        country: Literal["zm"],
+        operator: Literal["airtel", "mtn", "zamtel"],
         phone: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
