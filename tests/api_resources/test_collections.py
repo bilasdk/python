@@ -170,7 +170,7 @@ class TestCollections:
             phone="0977433571",
             reference="collection-001",
             wallet_id="68f11209-451f-4a15-bfcd-d916eb8b09f4",
-            bearer="customer",
+            bearer="merchant",
             customer_name="John Doe",
             narration="Payment for subscription",
         )
@@ -366,7 +366,7 @@ class TestAsyncCollections:
             phone="0977433571",
             reference="collection-001",
             wallet_id="68f11209-451f-4a15-bfcd-d916eb8b09f4",
-            bearer="customer",
+            bearer="merchant",
             customer_name="John Doe",
             narration="Payment for subscription",
         )

@@ -13,10 +13,10 @@ class CollectionInitiateMobileMoneyCollectionParams(TypedDict, total=False):
     amount: Required[float]
     """Collection amount"""
 
-    country: Required[Literal["zm", "ng"]]
+    country: Required[Literal["zm"]]
     """Country code"""
 
-    operator: Required[Literal["airtel", "mtn", "zamtel", "vodacom"]]
+    operator: Required[Literal["airtel", "mtn", "zamtel"]]
     """Mobile money operator"""
 
     phone: Required[str]

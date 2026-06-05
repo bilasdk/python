@@ -1,77 +1,27 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
-from datetime import datetime
-from typing_extensions import Literal
-
-from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
+from .recipient_response_dto import RecipientResponseDto
+from .shared.pagination_meta_dto import PaginationMetaDto
 
-__all__ = [
-    "TransferRecipientListResponse",
-    "TransferRecipientListResponseData",
-    "TransferRecipientListResponseDataData",
-    "TransferRecipientListResponseDataMeta",
-]
+__all__ = ["TransferRecipientListResponse", "Data"]
 
 
-class TransferRecipientListResponseDataData(BaseModel):
-    id: str
-    """Recipient UUID"""
-
-    account_name: str = FieldInfo(alias="accountName")
-    """Account holder name"""
-
-    country: str
-    """Country code"""
-
-    created_at: datetime = FieldInfo(alias="createdAt")
-    """Creation timestamp"""
-
-    type: Literal["bank-account", "mobile-money"]
-    """Recipient type"""
-
-    account_number: Optional[str] = FieldInfo(alias="accountNumber", default=None)
-    """Bank account number (bank-account only)"""
-
-    bank_id: Optional[str] = FieldInfo(alias="bankId", default=None)
-    """Bank ID (bank-account only)"""
-
-    bank_name: Optional[str] = FieldInfo(alias="bankName", default=None)
-    """Bank name (bank-account only)"""
-
-    operator: Optional[str] = None
-    """Mobile money operator (mobile-money only)"""
-
-    phone: Optional[str] = None
-    """Phone number (mobile-money only)"""
-
-
-class TransferRecipientListResponseDataMeta(BaseModel):
-    """Pagination metadata"""
-
-    current_page: float = FieldInfo(alias="currentPage")
-    """Current page number"""
-
-    page_count: float = FieldInfo(alias="pageCount")
-    """Total number of pages"""
-
-    per_page: float = FieldInfo(alias="perPage")
-    """Items per page"""
-
-    total: float
-    """Total number of records"""
-
-
-class TransferRecipientListResponseData(BaseModel):
-    data: List[TransferRecipientListResponseDataData]
+class Data(BaseModel):
+    data: List[RecipientResponseDto]
     """List of recipients"""
 
-    meta: TransferRecipientListResponseDataMeta
+    meta: PaginationMetaDto
     """Pagination metadata"""
 
 
-class TransferRecipientListResponse(BilaResponse):
-    data: Optional[TransferRecipientListResponseData] = None
+class TransferRecipientListResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
+    data: Optional[Data] = None

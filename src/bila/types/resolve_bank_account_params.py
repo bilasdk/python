@@ -16,5 +16,5 @@ class ResolveBankAccountParams(TypedDict, total=False):
     bank_id: Required[Annotated[str, PropertyInfo(alias="bankId")]]
     """Bank ID"""
 
-    country: Literal["zm", "ng"]
+    country: Literal["zm"]
     """Country code"""

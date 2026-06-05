@@ -38,6 +38,7 @@ client = Bila(
 )
 
 accounts = client.accounts.list()
+print(accounts.message)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -63,6 +64,7 @@ client = AsyncBila(
 
 async def main() -> None:
     accounts = await client.accounts.list()
+    print(accounts.message)
 
 
 asyncio.run(main())
@@ -96,6 +98,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         accounts = await client.accounts.list()
+        print(accounts.message)
 
 
 asyncio.run(main())
@@ -237,7 +240,7 @@ response = client.accounts.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
 account = response.parse()  # get the object that `accounts.list()` would have returned
-print(account)
+print(account.message)
 ```
 
 These methods return an [`APIResponse`](https://github.com/bilasdk/python/tree/main/src/bila/_response.py) object.

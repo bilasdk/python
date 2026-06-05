@@ -9,10 +9,10 @@ import pytest
 
 from bila import Bila, AsyncBila
 from bila.types import (
-    BilaResponse,
     WebhookListResponse,
     WebhookCreateResponse,
     WebhookUpdateResponse,
+    WebhookDeactivateResponse,
     WebhookListEventsResponse,
     WebhookRotateSecretResponse,
     WebhookGetDeliveriesResponse,
@@ -149,7 +149,7 @@ class TestWebhooks:
         webhook = client.webhooks.deactivate(
             "68f11209-451f-4a15-bfcd-d916eb8b09f4",
         )
-        assert_matches_type(BilaResponse, webhook, path=["response"])
+        assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -161,7 +161,7 @@ class TestWebhooks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = response.parse()
-        assert_matches_type(BilaResponse, webhook, path=["response"])
+        assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -173,7 +173,7 @@ class TestWebhooks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = response.parse()
-            assert_matches_type(BilaResponse, webhook, path=["response"])
+            assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -441,7 +441,7 @@ class TestAsyncWebhooks:
         webhook = await async_client.webhooks.deactivate(
             "68f11209-451f-4a15-bfcd-d916eb8b09f4",
         )
-        assert_matches_type(BilaResponse, webhook, path=["response"])
+        assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -453,7 +453,7 @@ class TestAsyncWebhooks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         webhook = await response.parse()
-        assert_matches_type(BilaResponse, webhook, path=["response"])
+        assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -465,7 +465,7 @@ class TestAsyncWebhooks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             webhook = await response.parse()
-            assert_matches_type(BilaResponse, webhook, path=["response"])
+            assert_matches_type(WebhookDeactivateResponse, webhook, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

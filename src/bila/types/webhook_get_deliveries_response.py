@@ -7,17 +7,12 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
+from .shared.pagination_meta_dto import PaginationMetaDto
 
-__all__ = [
-    "WebhookGetDeliveriesResponse",
-    "WebhookGetDeliveriesResponseData",
-    "WebhookGetDeliveriesResponseDataData",
-    "WebhookGetDeliveriesResponseDataMeta",
-]
+__all__ = ["WebhookGetDeliveriesResponse", "Data", "DataData"]
 
 
-class WebhookGetDeliveriesResponseDataData(BaseModel):
+class DataData(BaseModel):
     id: str
     """Delivery UUID"""
 
@@ -57,29 +52,19 @@ class WebhookGetDeliveriesResponseDataData(BaseModel):
     """Webhook config UUID"""
 
 
-class WebhookGetDeliveriesResponseDataMeta(BaseModel):
-    """Pagination metadata"""
-
-    current_page: float = FieldInfo(alias="currentPage")
-    """Current page number"""
-
-    page_count: float = FieldInfo(alias="pageCount")
-    """Total number of pages"""
-
-    per_page: float = FieldInfo(alias="perPage")
-    """Items per page"""
-
-    total: float
-    """Total number of records"""
-
-
-class WebhookGetDeliveriesResponseData(BaseModel):
-    data: List[WebhookGetDeliveriesResponseDataData]
+class Data(BaseModel):
+    data: List[DataData]
     """List of webhook deliveries"""
 
-    meta: WebhookGetDeliveriesResponseDataMeta
+    meta: PaginationMetaDto
     """Pagination metadata"""
 
 
-class WebhookGetDeliveriesResponse(BilaResponse):
-    data: Optional[WebhookGetDeliveriesResponseData] = None
+class WebhookGetDeliveriesResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
+    data: Optional[Data] = None
