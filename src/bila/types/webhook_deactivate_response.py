@@ -2,10 +2,10 @@
 
 from .._models import BaseModel
 
-__all__ = ["BilaResponse"]
+__all__ = ["WebhookDeactivateResponse"]
 
 
-class BilaResponse(BaseModel):
+class WebhookDeactivateResponse(BaseModel):
     message: str
     """Response message"""
 

@@ -5,12 +5,11 @@ from typing import Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
 
-__all__ = ["AccountGetBalanceResponse", "AccountGetBalanceResponseData"]
+__all__ = ["AccountGetBalanceResponse", "Data"]
 
 
-class AccountGetBalanceResponseData(BaseModel):
+class Data(BaseModel):
     available_balance: str = FieldInfo(alias="availableBalance")
     """Available balance"""
 
@@ -21,5 +20,11 @@ class AccountGetBalanceResponseData(BaseModel):
     """Ledger balance"""
 
 
-class AccountGetBalanceResponse(BilaResponse):
-    data: Optional[AccountGetBalanceResponseData] = None
+class AccountGetBalanceResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
+    data: Optional[Data] = None

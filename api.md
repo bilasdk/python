@@ -1,10 +1,17 @@
+# Shared Types
+
+```python
+from bila.types import PaginationMetaDto
+```
+
 # Accounts
 
 Types:
 
 ```python
 from bila.types import (
-    BilaResponse,
+    AccountDetailsDto,
+    AccountResponseDto,
     AccountRetrieveResponse,
     AccountListResponse,
     AccountGetBalanceResponse,
@@ -23,6 +30,7 @@ Types:
 
 ```python
 from bila.types import (
+    RecipientResponseDto,
     TransferRecipientRetrieveResponse,
     TransferRecipientListResponse,
     TransferRecipientCreateBankAccountResponse,
@@ -43,6 +51,8 @@ Types:
 
 ```python
 from bila.types import (
+    TransferRecipientDto,
+    TransferResponseDto,
     TransferRetrieveResponse,
     TransferListResponse,
     TransferGetStatusByReferenceResponse,
@@ -65,6 +75,8 @@ Types:
 
 ```python
 from bila.types import (
+    BilaCollectionCustomerDto,
+    BilaCollectionResponseDto,
     CollectionRetrieveResponse,
     CollectionListResponse,
     CollectionGetStatusByReferenceResponse,
@@ -84,7 +96,7 @@ Methods:
 Types:
 
 ```python
-from bila.types import TransactionRetrieveResponse, TransactionListResponse
+from bila.types import TransactionResponseDto, TransactionRetrieveResponse, TransactionListResponse
 ```
 
 Methods:
@@ -98,9 +110,11 @@ Types:
 
 ```python
 from bila.types import (
+    WebhookConfigResponseDto,
     WebhookCreateResponse,
     WebhookUpdateResponse,
     WebhookListResponse,
+    WebhookDeactivateResponse,
     WebhookGetDeliveriesResponse,
     WebhookListEventsResponse,
     WebhookRotateSecretResponse,
@@ -112,7 +126,7 @@ Methods:
 - <code title="post /api/v1/bila/webhooks">client.webhooks.<a href="./src/bila/resources/webhooks.py">create</a>(\*\*<a href="src/bila/types/webhook_create_params.py">params</a>) -> <a href="./src/bila/types/webhook_create_response.py">WebhookCreateResponse</a></code>
 - <code title="patch /api/v1/bila/webhooks/{id}">client.webhooks.<a href="./src/bila/resources/webhooks.py">update</a>(id, \*\*<a href="src/bila/types/webhook_update_params.py">params</a>) -> <a href="./src/bila/types/webhook_update_response.py">WebhookUpdateResponse</a></code>
 - <code title="get /api/v1/bila/webhooks">client.webhooks.<a href="./src/bila/resources/webhooks.py">list</a>() -> <a href="./src/bila/types/webhook_list_response.py">WebhookListResponse</a></code>
-- <code title="delete /api/v1/bila/webhooks/{id}">client.webhooks.<a href="./src/bila/resources/webhooks.py">deactivate</a>(id) -> <a href="./src/bila/types/bila_response.py">BilaResponse</a></code>
+- <code title="delete /api/v1/bila/webhooks/{id}">client.webhooks.<a href="./src/bila/resources/webhooks.py">deactivate</a>(id) -> <a href="./src/bila/types/webhook_deactivate_response.py">WebhookDeactivateResponse</a></code>
 - <code title="get /api/v1/bila/webhooks/{id}/deliveries">client.webhooks.<a href="./src/bila/resources/webhooks.py">get_deliveries</a>(id, \*\*<a href="src/bila/types/webhook_get_deliveries_params.py">params</a>) -> <a href="./src/bila/types/webhook_get_deliveries_response.py">WebhookGetDeliveriesResponse</a></code>
 - <code title="get /api/v1/bila/webhooks/events">client.webhooks.<a href="./src/bila/resources/webhooks.py">list_events</a>() -> <a href="./src/bila/types/webhook_list_events_response.py">WebhookListEventsResponse</a></code>
 - <code title="post /api/v1/bila/webhooks/{id}/rotate-secret">client.webhooks.<a href="./src/bila/resources/webhooks.py">rotate_secret</a>(id) -> <a href="./src/bila/types/webhook_rotate_secret_response.py">WebhookRotateSecretResponse</a></code>
@@ -134,7 +148,11 @@ Methods:
 Types:
 
 ```python
-from bila.types import ResolveBankAccountResponse, ResolveMobileMoneyResponse
+from bila.types import (
+    ResolvedAccountResponseDto,
+    ResolveBankAccountResponse,
+    ResolveMobileMoneyResponse,
+)
 ```
 
 Methods:

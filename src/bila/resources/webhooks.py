@@ -19,10 +19,10 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.bila_response import BilaResponse
 from ..types.webhook_list_response import WebhookListResponse
 from ..types.webhook_create_response import WebhookCreateResponse
 from ..types.webhook_update_response import WebhookUpdateResponse
+from ..types.webhook_deactivate_response import WebhookDeactivateResponse
 from ..types.webhook_list_events_response import WebhookListEventsResponse
 from ..types.webhook_rotate_secret_response import WebhookRotateSecretResponse
 from ..types.webhook_get_deliveries_response import WebhookGetDeliveriesResponse
@@ -217,7 +217,7 @@ class WebhooksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BilaResponse:
+    ) -> WebhookDeactivateResponse:
         """
         Deactivate a webhook
 
@@ -237,7 +237,7 @@ class WebhooksResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BilaResponse,
+            cast_to=WebhookDeactivateResponse,
         )
 
     def get_deliveries(
@@ -545,7 +545,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BilaResponse:
+    ) -> WebhookDeactivateResponse:
         """
         Deactivate a webhook
 
@@ -565,7 +565,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=BilaResponse,
+            cast_to=WebhookDeactivateResponse,
         )
 
     async def get_deliveries(

@@ -19,5 +19,5 @@ class TransferRecipientCreateBankAccountParams(TypedDict, total=False):
     account_name: Annotated[str, PropertyInfo(alias="accountName")]
     """Account holder name (optional, will be resolved)"""
 
-    country: Literal["zm", "ng"]
+    country: Literal["zm"]
     """Country code"""

@@ -25,7 +25,7 @@ class TransferInitiateBankTransferParams(TypedDict, total=False):
     bank_id: Annotated[str, PropertyInfo(alias="bankId")]
     """Bank ID (required if no transferRecipientId)"""
 
-    country: Literal["zm", "ng"]
+    country: Literal["zm"]
     """Country code"""
 
     narration: str

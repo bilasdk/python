@@ -3,12 +3,11 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
 
-__all__ = ["BankListResponse", "BankListResponseData"]
+__all__ = ["BankListResponse", "Data"]
 
 
-class BankListResponseData(BaseModel):
+class Data(BaseModel):
     id: str
     """Bank ID"""
 
@@ -25,5 +24,11 @@ class BankListResponseData(BaseModel):
     """Bank type"""
 
 
-class BankListResponse(BilaResponse):
-    data: Optional[List[BankListResponseData]] = None
+class BankListResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
+    data: Optional[List[Data]] = None

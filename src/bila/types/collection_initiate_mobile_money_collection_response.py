@@ -1,65 +1,18 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import datetime
-from typing_extensions import Literal
-
-from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
+from .bila_collection_response_dto import BilaCollectionResponseDto
 
-__all__ = [
-    "CollectionInitiateMobileMoneyCollectionResponse",
-    "CollectionInitiateMobileMoneyCollectionResponseData",
-    "CollectionInitiateMobileMoneyCollectionResponseDataCustomer",
-]
+__all__ = ["CollectionInitiateMobileMoneyCollectionResponse"]
 
 
-class CollectionInitiateMobileMoneyCollectionResponseDataCustomer(BaseModel):
-    """Customer details"""
+class CollectionInitiateMobileMoneyCollectionResponse(BaseModel):
+    message: str
+    """Response message"""
 
-    name: str
-    """Customer name"""
+    status: bool
+    """Request success status"""
 
-    operator: str
-    """Mobile money operator"""
-
-    phone: str
-    """Customer phone number"""
-
-
-class CollectionInitiateMobileMoneyCollectionResponseData(BaseModel):
-    id: str
-    """Collection ID"""
-
-    amount: float
-    """Collection amount"""
-
-    created_at: datetime = FieldInfo(alias="createdAt")
-    """Collection creation timestamp"""
-
-    currency: str
-    """Currency code"""
-
-    customer: CollectionInitiateMobileMoneyCollectionResponseDataCustomer
-    """Customer details"""
-
-    reference: str
-    """Client reference"""
-
-    status: Literal["pending", "successful", "failed", "otp-required", "pay-offline"]
-    """Collection status"""
-
-    completed_at: Optional[datetime] = FieldInfo(alias="completedAt", default=None)
-    """Collection completion timestamp"""
-
-    fee_bearer: Optional[Literal["merchant", "customer"]] = FieldInfo(alias="feeBearer", default=None)
-    """Who bears the collection platform fee"""
-
-    narration: Optional[str] = None
-    """Collection narration"""
-
-
-class CollectionInitiateMobileMoneyCollectionResponse(BilaResponse):
-    data: Optional[CollectionInitiateMobileMoneyCollectionResponseData] = None
+    data: Optional[BilaCollectionResponseDto] = None

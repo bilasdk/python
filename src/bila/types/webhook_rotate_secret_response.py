@@ -3,15 +3,20 @@
 from typing import Optional
 
 from .._models import BaseModel
-from .bila_response import BilaResponse
 
-__all__ = ["WebhookRotateSecretResponse", "WebhookRotateSecretResponseData"]
+__all__ = ["WebhookRotateSecretResponse", "Data"]
 
 
-class WebhookRotateSecretResponseData(BaseModel):
+class Data(BaseModel):
     secret: str
     """New signing secret (64-character hex, shown once)"""
 
 
-class WebhookRotateSecretResponse(BilaResponse):
-    data: Optional[WebhookRotateSecretResponseData] = None
+class WebhookRotateSecretResponse(BaseModel):
+    message: str
+    """Response message"""
+
+    status: bool
+    """Request success status"""
+
+    data: Optional[Data] = None
