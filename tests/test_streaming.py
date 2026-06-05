@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from bila import Bila, AsyncBila
-from bila._streaming import Stream, AsyncStream, ServerSentEvent
+from usebila import Bila, AsyncBila
+from usebila._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

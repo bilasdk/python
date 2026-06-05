@@ -7,17 +7,17 @@ from ._proxy import LazyProxy
 
 
 class ResourcesProxy(LazyProxy[Any]):
-    """A proxy for the `bila.resources` module.
+    """A proxy for the `usebila.resources` module.
 
-    This is used so that we can lazily import `bila.resources` only when
-    needed *and* so that users can just import `bila` and reference `bila.resources`
+    This is used so that we can lazily import `usebila.resources` only when
+    needed *and* so that users can just import `usebila` and reference `usebila.resources`
     """
 
     @override
     def __load__(self) -> Any:
         import importlib
 
-        mod = importlib.import_module("bila.resources")
+        mod = importlib.import_module("usebila.resources")
         return mod
 
 

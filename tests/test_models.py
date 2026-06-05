@@ -8,9 +8,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from bila._utils import PropertyInfo
-from bila._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from bila._models import DISCRIMINATOR_CACHE, BaseModel, EagerIterable, construct_type
+from usebila._utils import PropertyInfo
+from usebila._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from usebila._models import DISCRIMINATOR_CACHE, BaseModel, EagerIterable, construct_type
 
 
 class BasicModel(BaseModel):

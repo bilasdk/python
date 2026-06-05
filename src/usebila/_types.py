@@ -104,7 +104,7 @@ HttpxRequestFiles = Union[Mapping[str, HttpxFileTypes], Sequence[Tuple[str, Http
 # This unfortunately means that you will either have
 # to import this type and pass it explicitly:
 #
-# from bila import NoneType
+# from usebila import NoneType
 # client.get('/foo', cast_to=NoneType)
 #
 # or build it yourself:

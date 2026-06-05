@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from bila import Bila, AsyncBila
-from bila.types import AccountListResponse, AccountRetrieveResponse, AccountGetBalanceResponse
+from usebila import Bila, AsyncBila
 from tests.utils import assert_matches_type
+from usebila.types import AccountListResponse, AccountRetrieveResponse, AccountGetBalanceResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

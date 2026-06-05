@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from bila._utils._path import path_template
+from usebila._utils._path import path_template
 
 
 @pytest.mark.parametrize(

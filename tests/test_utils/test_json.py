@@ -5,8 +5,8 @@ from typing import Union
 
 import pydantic
 
-from bila import _compat
-from bila._utils._json import openapi_dumps
+from usebila import _compat
+from usebila._utils._json import openapi_dumps
 
 
 class TestOpenapiDumps:
