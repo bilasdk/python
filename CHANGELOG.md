@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 (2026-06-10)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/bilasdk/python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([75cb3be](https://github.com/bilasdk/python/commit/75cb3be33fa99a517c1b72f4f9d9d31b43106566))
+
+
+### Chores
+
+* update SDK settings ([8e54293](https://github.com/bilasdk/python/commit/8e54293efdddd837dfe6b95dbe9cdd796d6c1a53))
+* update SDK settings ([5f112fc](https://github.com/bilasdk/python/commit/5f112fc6d947cb9508c23d16fb7d1cdc073fd6e6))
+* update SDK settings ([b18a1b0](https://github.com/bilasdk/python/commit/b18a1b09b21dd67f484d076602616a94e5a629c2))
+
 ## 0.1.0 (2026-06-05)
 
 Full Changelog: [v0.0.2...v0.1.0](https://github.com/bilasdk/python/compare/v0.0.2...v0.1.0)

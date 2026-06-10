@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from bila._types import FileTypes, ArrayFormat
-from bila._utils import extract_files
+from usebila._types import FileTypes, ArrayFormat
+from usebila._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

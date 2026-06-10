@@ -1,7 +1,7 @@
 # Bila Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/bila.svg?label=pypi%20(stable))](https://pypi.org/project/bila/)
+[![PyPI version](https://img.shields.io/pypi/v/usebila.svg?label=pypi%20(stable))](https://pypi.org/project/usebila/)
 
 The Bila Python library provides convenient access to the Bila REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -16,12 +16,9 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/bilasdk/python.git
+# install from PyPI
+pip install usebila
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install bila`
 
 ## Usage
 
@@ -29,7 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from bila import Bila
+from usebila import Bila
 
 client = Bila(
     api_key=os.environ.get("BILA_API_KEY"),  # This is the default and can be omitted
@@ -77,7 +74,7 @@ Simply import `AsyncBila` instead of `Bila` and use `await` with each API call:
 ```python
 import os
 import asyncio
-from bila import AsyncBila
+from usebila import AsyncBila
 
 client = AsyncBila(
     api_key=os.environ.get("BILA_API_KEY"),  # This is the default and can be omitted
@@ -103,8 +100,8 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'bila[aiohttp] @ git+ssh://git@github.com/bilasdk/python.git'
+# install from PyPI
+pip install usebila[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -112,8 +109,8 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 ```python
 import os
 import asyncio
-from bila import DefaultAioHttpClient
-from bila import AsyncBila
+from usebila import DefaultAioHttpClient
+from usebila import AsyncBila
 
 
 async def main() -> None:
@@ -171,27 +168,27 @@ See [api.md](api.md) for the full list of types, or browse the [examples](./exam
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `bila.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `usebila.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `bila.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `usebila.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `bila.APIError`.
+All errors inherit from `usebila.APIError`.
 
 ```python
-import bila
-from bila import Bila
+import usebila
+from usebila import Bila
 
 client = Bila()
 
 try:
     client.accounts.list()
-except bila.APIConnectionError as e:
+except usebila.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except bila.RateLimitError as e:
+except usebila.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except bila.APIStatusError as e:
+except usebila.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -219,7 +216,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from bila import Bila
+from usebila import Bila
 
 # Configure the default for all requests:
 client = Bila(
@@ -237,7 +234,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from bila import Bila
+from usebila import Bila
 
 # Configure the default for all requests:
 client = Bila(
@@ -289,7 +286,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from bila import Bila
+from usebila import Bila
 
 client = Bila()
 response = client.accounts.with_raw_response.list()
@@ -299,9 +296,9 @@ account = response.parse()  # get the object that `accounts.list()` would have r
 print(account.message)
 ```
 
-These methods return an [`APIResponse`](https://github.com/bilasdk/python/tree/main/src/bila/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/bilasdk/python/tree/main/src/usebila/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/bilasdk/python/tree/main/src/bila/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/bilasdk/python/tree/main/src/usebila/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -363,7 +360,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from bila import Bila, DefaultHttpxClient
+from usebila import Bila, DefaultHttpxClient
 
 client = Bila(
     # Or use the `BILA_BASE_URL` env var
@@ -386,7 +383,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from bila import Bila
+from usebila import Bila
 
 with Bila() as client:
   # make requests here
@@ -414,8 +411,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import bila
-print(bila.__version__)
+import usebila
+print(usebila.__version__)
 ```
 
 ## Requirements

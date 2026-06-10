@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/bila/_version.py"
+    "src/usebila/_version.py"
   ]
 }
