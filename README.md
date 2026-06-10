@@ -43,6 +43,30 @@ we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `BILA_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
+## Examples
+
+Runnable examples live in the [examples](./examples/) directory. Each file demonstrates a specific area of the API:
+
+| Example                                                     | Description                                          |
+| ----------------------------------------------------------- | ---------------------------------------------------- |
+| [accounts.py](./examples/accounts.py)                       | Retrieve accounts, list accounts, and check balances |
+| [banks.py](./examples/banks.py)                             | List supported banks and financial institutions      |
+| [collections.py](./examples/collections.py)                 | Collect payments via mobile money                    |
+| [resolve.py](./examples/resolve.py)                         | Verify bank account and mobile money details         |
+| [transactions.py](./examples/transactions.py)               | Retrieve and list transaction history                |
+| [transfer_recipients.py](./examples/transfer_recipients.py) | Manage payout recipients                             |
+| [transfers.py](./examples/transfers.py)                     | Send payouts via bank transfer and mobile money      |
+| [webhooks.py](./examples/webhooks.py)                       | Configure webhooks and manage delivery history       |
+
+To run an example from this repository:
+
+```sh
+uv sync
+uv run python examples/accounts.py
+```
+
+Replace `accounts.py` with any example from the table above. Set your API key via the `BILA_API_KEY` environment variable or in the example file before running.
+
 ## Async usage
 
 Simply import `AsyncBila` instead of `Bila` and use `await` with each API call:
@@ -103,12 +127,44 @@ asyncio.run(main())
 
 ## Using types
 
+Every API method has typed request params and responses. You only need one import — types are available from `usebila.types`:
+
+```python
+from usebila import Bila
+from usebila.types import AccountListResponse, CollectionListParams
+
+client = Bila(
+    api_key="Your API key",
+    environment="sandbox",
+)
+
+# Response type — what the API returns
+accounts: AccountListResponse = client.accounts.list()
+
+# Request type — what you send to the API
+params: CollectionListParams = {
+    "account_id": "your-wallet-id",
+    "page": 1,
+    "per_page": 50,
+}
+collections = client.collections.list(**params)
+```
+
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
 
 - Serializing back into JSON, `model.to_json()`
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+Type names follow a simple pattern:
+
+| Kind           | Pattern                      | Example                              |
+| -------------- | ---------------------------- | ------------------------------------ |
+| Response       | `{Resource}{Action}Response` | `TransferRetrieveResponse`           |
+| Request params | `{Resource}{Action}Params`   | `WebhookCreateParams`                |
+
+See [api.md](api.md) for the full list of types, or browse the [examples](./examples/) for real usage.
 
 ## Handling errors
 
