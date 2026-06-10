@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, Sequence, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from bila._types import Omit, NoneType
-from bila._utils import (
+from usebila._types import Omit, NoneType
+from usebila._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -19,8 +19,8 @@ from bila._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from bila._compat import PYDANTIC_V1, field_outer_type, get_model_fields
-from bila._models import BaseModel
+from usebila._compat import PYDANTIC_V1, field_outer_type, get_model_fields
+from usebila._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 
