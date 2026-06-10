@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from bila._types import Base64FileInput, omit, not_given
-from bila._utils import (
+from usebila._types import Base64FileInput, omit, not_given
+from usebila._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from bila._compat import PYDANTIC_V1
-from bila._models import BaseModel
+from usebila._compat import PYDANTIC_V1
+from usebila._models import BaseModel
 
 _T = TypeVar("_T")
 

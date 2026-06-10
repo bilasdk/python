@@ -19,12 +19,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from bila import Bila, AsyncBila, APIResponseValidationError
-from bila._types import Omit
-from bila._utils import asyncify
-from bila._models import BaseModel, FinalRequestOptions
-from bila._exceptions import BilaError, APIStatusError, APITimeoutError, APIResponseValidationError
-from bila._base_client import (
+from usebila import Bila, AsyncBila, APIResponseValidationError
+from usebila._types import Omit
+from usebila._utils import asyncify
+from usebila._models import BaseModel, FinalRequestOptions
+from usebila._exceptions import BilaError, APIStatusError, APITimeoutError, APIResponseValidationError
+from usebila._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -286,10 +286,10 @@ class TestBila:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "bila/_legacy_response.py",
-                        "bila/_response.py",
+                        "usebila/_legacy_response.py",
+                        "usebila/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "bila/_compat.py",
+                        "usebila/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -874,7 +874,7 @@ class TestBila:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Bila) -> None:
         respx_mock.get("/api/v1/bila/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -884,7 +884,7 @@ class TestBila:
 
         assert _get_open_connections(client) == 0
 
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Bila) -> None:
         respx_mock.get("/api/v1/bila/accounts").mock(return_value=httpx.Response(500))
@@ -894,7 +894,7 @@ class TestBila:
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -925,7 +925,7 @@ class TestBila:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(self, client: Bila, failures_before_success: int, respx_mock: MockRouter) -> None:
         client = client.with_options(max_retries=4)
@@ -946,7 +946,7 @@ class TestBila:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Bila, failures_before_success: int, respx_mock: MockRouter
@@ -1199,10 +1199,10 @@ class TestAsyncBila:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "bila/_legacy_response.py",
-                        "bila/_response.py",
+                        "usebila/_legacy_response.py",
+                        "usebila/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "bila/_compat.py",
+                        "usebila/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1804,7 +1804,7 @@ class TestAsyncBila:
         calculated = async_client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncBila) -> None:
         respx_mock.get("/api/v1/bila/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -1814,7 +1814,7 @@ class TestAsyncBila:
 
         assert _get_open_connections(async_client) == 0
 
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncBila) -> None:
         respx_mock.get("/api/v1/bila/accounts").mock(return_value=httpx.Response(500))
@@ -1824,7 +1824,7 @@ class TestAsyncBila:
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
@@ -1855,7 +1855,7 @@ class TestAsyncBila:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_omit_retry_count_header(
         self, async_client: AsyncBila, failures_before_success: int, respx_mock: MockRouter
@@ -1878,7 +1878,7 @@ class TestAsyncBila:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("bila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("usebila._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_overwrite_retry_count_header(
         self, async_client: AsyncBila, failures_before_success: int, respx_mock: MockRouter
