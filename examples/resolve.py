@@ -11,8 +11,8 @@ import os
 from usebila import Bila
 from usebila.types import (
     ResolveBankAccountParams,
-    ResolveBankAccountResponse,
     ResolveMobileMoneyParams,
+    ResolveBankAccountResponse,
     ResolveMobileMoneyResponse,
 )
 

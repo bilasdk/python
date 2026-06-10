@@ -10,11 +10,11 @@ import os
 
 from usebila import Bila
 from usebila.types import (
-    CollectionGetStatusByReferenceResponse,
-    CollectionInitiateMobileMoneyCollectionResponse,
     CollectionListParams,
     CollectionListResponse,
     CollectionRetrieveResponse,
+    CollectionGetStatusByReferenceResponse,
+    CollectionInitiateMobileMoneyCollectionResponse,
 )
 
 client = Bila(

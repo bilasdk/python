@@ -11,15 +11,15 @@ import os
 from usebila import Bila
 from usebila.types import (
     WebhookCreateParams,
-    WebhookCreateResponse,
-    WebhookDeactivateResponse,
-    WebhookGetDeliveriesParams,
-    WebhookGetDeliveriesResponse,
-    WebhookListEventsResponse,
     WebhookListResponse,
-    WebhookRotateSecretResponse,
     WebhookUpdateParams,
+    WebhookCreateResponse,
     WebhookUpdateResponse,
+    WebhookDeactivateResponse,
+    WebhookListEventsResponse,
+    WebhookGetDeliveriesParams,
+    WebhookRotateSecretResponse,
+    WebhookGetDeliveriesResponse,
 )
 
 client = Bila(

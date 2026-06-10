@@ -10,13 +10,13 @@ import os
 
 from usebila import Bila
 from usebila.types import (
-    TransferRecipientCreateBankAccountParams,
-    TransferRecipientCreateBankAccountResponse,
-    TransferRecipientCreateMobileMoneyParams,
-    TransferRecipientCreateMobileMoneyResponse,
     TransferRecipientListParams,
     TransferRecipientListResponse,
     TransferRecipientRetrieveResponse,
+    TransferRecipientCreateBankAccountParams,
+    TransferRecipientCreateMobileMoneyParams,
+    TransferRecipientCreateBankAccountResponse,
+    TransferRecipientCreateMobileMoneyResponse,
 )
 
 client = Bila(
