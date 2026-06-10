@@ -127,11 +127,11 @@ asyncio.run(main())
 
 ## Using types
 
-Every API method has typed request params and responses. You only need one import — types are available from `bila.types`:
+Every API method has typed request params and responses. You only need one import — types are available from `usebila.types`:
 
 ```python
-from bila import Bila
-from bila.types import AccountListResponse, CollectionListParams
+from usebila import Bila
+from usebila.types import AccountListResponse, CollectionListParams
 
 client = Bila(
     api_key="Your API key",
